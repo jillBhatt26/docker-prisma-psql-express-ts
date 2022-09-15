@@ -1,0 +1,35 @@
+FROM node:16.16.0-alpine
+
+RUN yarn global add nodemon
+
+WORKDIR /app
+
+COPY ./package.json ./
+COPY ./yarn.lock ./
+
+# COPY prisma ./prisma/
+
+COPY ./.env ./
+COPY ./tsconfig.json ./
+
+RUN yarn install --immutable --immutable-cache --check-cache
+
+COPY ./ ./
+
+# ENV WAIT_VERSION 2.7.2
+# ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
+# RUN chmod +x /wait
+
+# RUN yarn run db:push
+
+RUN npx prisma generate
+# RUN npx prisma db push
+# RUN /wait && npx prisma db push
+
+EXPOSE 5001
+
+# CMD [ "yarn", "run", "dev", "&&", "yarn", "run", "db:push" ]
+# CMD [ "yarn", "run", "db:push", "&&", "yarn", "run", "dev" ]
+# CMD [ "npx", "run", "db", "push", ";", "yarn", "run", "dev" ]
+# CMD [ "yarn", "run", "dev" ]
+ENTRYPOINT [ "sh", "./cmd/entrypoint.sh" ]
