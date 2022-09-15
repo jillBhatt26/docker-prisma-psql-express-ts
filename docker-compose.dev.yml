@@ -43,15 +43,15 @@ services:
         volumes:
             - pgadmin-data:/var/lib/pgadmin
 
-    prisma-studio:
-        container_name: prisma-studio
-        image: timothyjmiller/prisma-studio:latest
-        depends_on:
-            - postgres
-        env_file:
-            - ./.env
-        ports:
-            - 5555:5555
+    # prisma-studio:
+    #     container_name: prisma-studio
+    #     image: timothyjmiller/prisma-studio:latest
+    #     depends_on:
+    #         - postgres
+    #     env_file:
+    #         - ./.env
+    #     ports:
+    #         - 5555:5555
 
 volumes:
     pg-data:

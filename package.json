@@ -8,7 +8,7 @@
         "pro": "node ./dist/index.js",
         "build": "tsc -p ./",
         "db:push": "npx prisma db push",
-        "compose:up:dev": "docker-compose -f docker-compose.dev.yml up --build -d",
+        "compose:up:dev": "docker-compose -f docker-compose.dev.yml up --build",
         "compose:down:dev": "docker-compose -f docker-compose.dev.yml down --rmi all --remove-orphans",
         "compose:down:dev:full": "docker-compose -f docker-compose.dev.yml down --rmi all -v --remove-orphans"
     },
